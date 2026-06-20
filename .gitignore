@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+
+# local environment files
+.env*
+!.env.example
+
+# deployment metadata
+.vercel/
+
+# logs and OS files
+*.log
+.DS_Store
+
+# TypeScript build info
+*.tsbuildinfo
