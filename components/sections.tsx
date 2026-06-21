@@ -192,7 +192,7 @@ export function FaqSection({ t }: SectionProps) {
   );
 }
 
-export function ContactSection({ t }: SectionProps) {
+export function ContactSection({ t, onBook }: SectionProps) {
   const [sent, setSent] = useState(false);
   function handleSubmit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setSent(true); event.currentTarget.reset(); window.setTimeout(() => setSent(false), 4500); }
   return (
@@ -200,6 +200,7 @@ export function ContactSection({ t }: SectionProps) {
       <div className="container contact-shell"><div className="contact-intro"><SectionHeading eyebrow={t.contact.eyebrow} title={t.contact.title} text={t.contact.text} /><div className="contact-line"><span/><p>{t.contact.helper}</p></div></div>
         <Reveal className="contact-form-wrap"><form className="contact-form glass-panel" onSubmit={handleSubmit}><aside className="demo-notice" role="note"><div className="demo-notice-icon"><Zap size={18}/></div><div><strong>{t.contact.demoLabel}</strong><p>{t.contact.demoText}</p></div></aside><div className="field-row"><label>{t.contact.name}<input required name="name" autoComplete="name" placeholder={t.contact.placeholderName}/></label><label>{t.contact.email}<input required name="email" autoComplete="email" type="email" placeholder={t.contact.placeholderEmail}/></label></div><label>{t.contact.project}<textarea required name="project" rows={4} placeholder={t.contact.placeholderProject}/></label><div className="form-bottom"><MagneticButton type="submit" arrow><Send size={16} aria-hidden="true"/>{t.contact.send}</MagneticButton><span>{t.contact.helper}</span></div><AnimatePresence>{sent && <motion.div className="demo-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 10, scale: .97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: .98 }} transition={{ type: "spring", stiffness: 340, damping: 24 }}><span>✓</span><p>{t.contact.demoSuccess}</p><i/></motion.div>}</AnimatePresence></form></Reveal>
       </div>
+      <DeveloperContactSection t={t} onBook={onBook} />
     </section>
   );
 }
@@ -211,7 +212,7 @@ export function DeveloperContactSection({ t }: SectionProps) {
     { name: t.developer.instagram, handle: "@ddbadalyan", href: "https://instagram.com/ddbadalyan", icon: Instagram, tone: "instagram" }
   ];
   return (
-    <section className="section-shell developer-section section-space">
+    <div className="developer-section developer-contact-inline">
       <div className="developer-light developer-light--one" aria-hidden="true" />
       <div className="developer-light developer-light--two" aria-hidden="true" />
       <div className="container relative z-10">
@@ -219,13 +220,13 @@ export function DeveloperContactSection({ t }: SectionProps) {
         <Reveal className="developer-availability"><span className="status-dot" />{t.developer.availability}</Reveal>
         <div className="developer-links">{channels.map(({ name, handle, href, icon: Icon, tone }, index) => <Reveal key={name} delay={index * .07}><TiltCard intensity={7} className={`developer-card developer-card--${tone}`}><a href={href} target="_blank" rel="noreferrer" aria-label={`${name}: ${handle}`}><div className="developer-card-top"><span className="developer-icon"><Icon size={23}/></span><span className="developer-index">0{index + 1}</span></div><div className="developer-card-copy"><h3>{name}</h3><p>{handle}</p></div><span className="developer-card-action">{t.developer.action}<ArrowRight size={18}/></span><span className="developer-card-glow" aria-hidden="true" /></a></TiltCard></Reveal>)}</div>
       </div>
-    </section>
+    </div>
   );
 }
 
 export function FinalCtaSection({ t, onBook }: SectionProps) {
   return (
-    <section className="section-shell final-section"><DotGrid /><div className="final-orb final-orb--one"/><div className="final-orb final-orb--two"/><div className="container relative z-10 py-28 text-center sm:py-36"><Reveal className="mx-auto max-w-4xl"><p className="eyebrow justify-center">{t.cta.eyebrow}</p><h2 className="final-title mt-6">{t.cta.titleA}<br/><span className="gradient-text">{t.cta.titleB}</span></h2><p className="section-copy mx-auto mt-6 text-center">{t.cta.text}</p><div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row"><MagneticButton onClick={onBook} arrow>{t.cta.action}</MagneticButton><a href="mailto:hello@example.com" className="secondary-cta secondary-cta--dark">{t.cta.email}<ArrowRight size={17}/></a></div></Reveal></div>
+    <section className="section-shell final-section"><DotGrid /><div className="final-orb final-orb--one"/><div className="final-orb final-orb--two"/><div className="container relative z-10 py-28 text-center sm:py-36"><Reveal className="mx-auto max-w-4xl"><p className="eyebrow justify-center">{t.cta.eyebrow}</p><h2 className="final-title mt-6">{t.cta.titleA}<br/><span className="gradient-text">{t.cta.titleB}</span></h2><p className="section-copy mx-auto mt-6 text-center">{t.cta.text}</p><div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row"><MagneticButton onClick={onBook} arrow>{t.cta.action}</MagneticButton><a href="#contact" className="secondary-cta secondary-cta--dark">{t.cta.email}<ArrowRight size={17}/></a></div></Reveal></div>
   </section>
   );
 }

@@ -5,7 +5,7 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { copy, languageMeta, type Locale } from "@/lib/i18n";
 import {
-  CasesSection, ContactSection, DeveloperContactSection, FaqSection, FeaturesSection, FinalCtaSection,
+  CasesSection, ContactSection, FaqSection, FeaturesSection, FinalCtaSection,
   GallerySection, HeroSection, InteractiveSection, MotionSection, TestimonialsSection
 } from "./sections";
 import { MagneticButton } from "./ui";
@@ -98,7 +98,6 @@ export function SiteShell() {
       <TestimonialsSection t={t} onBook={() => setBookingOpen(true)} />
       <FaqSection t={t} onBook={() => setBookingOpen(true)} />
       <ContactSection t={t} onBook={() => setBookingOpen(true)} />
-      <DeveloperContactSection t={t} onBook={() => setBookingOpen(true)} />
       <FinalCtaSection t={t} onBook={() => setBookingOpen(true)} />
     </main>
     <footer className="site-footer"><div className="container"><a href="#home" className="site-logo"><span>M</span><em>may</em></a><p>© {new Date().getFullYear()} MAY / {t.system.footer}.</p><a href="#home">{t.system.backTop} ↑</a></div></footer>
