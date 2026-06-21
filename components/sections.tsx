@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Activity, ArrowRight, CalendarDays, ChevronDown, ChevronLeft, ChevronRight, CircleUserRound,
-  Code2, FormInput, Globe2, Layers3, MapPin, MousePointer2, Package, Play, Send,
+  Code2, FormInput, Globe2, Instagram, Layers3, MapPin, MousePointer2, Package, Phone, Play, Send,
   ShoppingBag, Sparkles, Store, UserRound, WandSparkles, Zap, type LucideIcon
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
@@ -198,7 +198,26 @@ export function ContactSection({ t }: SectionProps) {
   return (
     <section id="contact" className="section-shell section-space">
       <div className="container contact-shell"><div className="contact-intro"><SectionHeading eyebrow={t.contact.eyebrow} title={t.contact.title} text={t.contact.text} /><div className="contact-line"><span/><p>{t.contact.helper}</p></div></div>
-        <Reveal className="contact-form-wrap"><form className="contact-form glass-panel" onSubmit={handleSubmit}><div className="field-row"><label>{t.contact.name}<input required name="name" autoComplete="name" placeholder={t.contact.placeholderName}/></label><label>{t.contact.email}<input required name="email" autoComplete="email" type="email" placeholder={t.contact.placeholderEmail}/></label></div><label>{t.contact.project}<textarea required name="project" rows={4} placeholder={t.contact.placeholderProject}/></label><div className="form-bottom"><MagneticButton type="submit" arrow><Send size={16} aria-hidden="true"/>{t.contact.send}</MagneticButton><span>{t.contact.helper}</span></div><AnimatePresence>{sent && <motion.p className="form-success" role="status" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}><span>✓</span>{t.contact.success}</motion.p>}</AnimatePresence></form></Reveal>
+        <Reveal className="contact-form-wrap"><form className="contact-form glass-panel" onSubmit={handleSubmit}><aside className="demo-notice" role="note"><div className="demo-notice-icon"><Zap size={18}/></div><div><strong>{t.contact.demoLabel}</strong><p>{t.contact.demoText}</p></div></aside><div className="field-row"><label>{t.contact.name}<input required name="name" autoComplete="name" placeholder={t.contact.placeholderName}/></label><label>{t.contact.email}<input required name="email" autoComplete="email" type="email" placeholder={t.contact.placeholderEmail}/></label></div><label>{t.contact.project}<textarea required name="project" rows={4} placeholder={t.contact.placeholderProject}/></label><div className="form-bottom"><MagneticButton type="submit" arrow><Send size={16} aria-hidden="true"/>{t.contact.send}</MagneticButton><span>{t.contact.helper}</span></div><AnimatePresence>{sent && <motion.div className="demo-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 10, scale: .97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: .98 }} transition={{ type: "spring", stiffness: 340, damping: 24 }}><span>✓</span><p>{t.contact.demoSuccess}</p><i/></motion.div>}</AnimatePresence></form></Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function DeveloperContactSection({ t }: SectionProps) {
+  const channels: { name: string; handle: string; href: string; icon: LucideIcon; tone: string }[] = [
+    { name: t.developer.telegram, handle: "@ddbadalyann", href: "https://t.me/ddbadalyann", icon: Send, tone: "telegram" },
+    { name: t.developer.whatsapp, handle: "+374 96 054 575", href: "https://wa.me/37496054575", icon: Phone, tone: "whatsapp" },
+    { name: t.developer.instagram, handle: "@ddbadalyan", href: "https://instagram.com/ddbadalyan", icon: Instagram, tone: "instagram" }
+  ];
+  return (
+    <section className="section-shell developer-section section-space">
+      <div className="developer-light developer-light--one" aria-hidden="true" />
+      <div className="developer-light developer-light--two" aria-hidden="true" />
+      <div className="container relative z-10">
+        <SectionHeading eyebrow={t.developer.eyebrow} title={t.developer.title} text={t.developer.text} align="center" />
+        <Reveal className="developer-availability"><span className="status-dot" />{t.developer.availability}</Reveal>
+        <div className="developer-links">{channels.map(({ name, handle, href, icon: Icon, tone }, index) => <Reveal key={name} delay={index * .07}><TiltCard intensity={7} className={`developer-card developer-card--${tone}`}><a href={href} target="_blank" rel="noreferrer" aria-label={`${name}: ${handle}`}><div className="developer-card-top"><span className="developer-icon"><Icon size={23}/></span><span className="developer-index">0{index + 1}</span></div><div className="developer-card-copy"><h3>{name}</h3><p>{handle}</p></div><span className="developer-card-action">{t.developer.action}<ArrowRight size={18}/></span><span className="developer-card-glow" aria-hidden="true" /></a></TiltCard></Reveal>)}</div>
       </div>
     </section>
   );
